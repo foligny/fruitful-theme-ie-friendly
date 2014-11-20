@@ -245,6 +245,11 @@ function fruitful_scripts() {
 	
 	if ($slider_options){
 		if (isset($theme_options['select_slider'])){
+			if($theme_options['select_slider'] == "1" && preg_match('/(?i)msie [2-8]/',$_SERVER['HTTP_USER_AGENT']))
+			{	$theme_options['select_slider'] = 2; // Fallback to nivo for old IE: IE 6,7,8 do not support flex-slider (risk of crash and shows blank page loading forever in IE6)
+				// http://support.fruitfulcode.com/hc/communities/public/questions/202480683-Site-Causes-IE-8-Crash-Windows-XP-
+			}
+
 			  if ($theme_options['select_slider'] == "1") {
 					wp_enqueue_style( 'flex-slider', 			get_template_directory_uri() . '/js/flex_slider/slider.css');
 					wp_enqueue_script('flex-fitvid-j',			get_template_directory_uri() . '/js/flex_slider/jquery.flexslider-min.js', array( 'jquery' ), '20130930', false );
@@ -414,6 +419,10 @@ function fruitful_get_slider() {
 		}
 		
 		if ($path_to_img){
+			if($theme_options['select_slider'] == "1" && preg_match('/(?i)msie [2-8]/',$_SERVER['HTTP_USER_AGENT']))
+			{	$theme_options['select_slider'] = 2; // Fallback to nivo for old IE: IE 6,7,8 do not support flex-slider (risk of crash and shows blank page loading forever in IE6)
+				// http://support.fruitfulcode.com/hc/communities/public/questions/202480683-Site-Causes-IE-8-Crash-Windows-XP-
+			}
 			if ($theme_options['select_slider'] == "1") {
 					if ($slider_options == 1) {
 						$slider_ .= '<div class="main-slider-container">';
@@ -923,6 +932,10 @@ function fruitful_get_sliders() {
 	$slider_options = get_post_meta( $front_page_id, $prefix . 'slider_layout');
 	if ($slider_options){
 		if (!empty($theme_options['select_slider'])) {
+			if($theme_options['select_slider'] == "1" && preg_match('/(?i)msie [2-8]/',$_SERVER['HTTP_USER_AGENT']))
+			{	$theme_options['select_slider'] = 2; // Fallback to nivo for old IE: IE 6,7,8 do not support flex-slider (risk of crash and shows blank page loading forever in IE6)
+				// http://support.fruitfulcode.com/hc/communities/public/questions/202480683-Site-Causes-IE-8-Crash-Windows-XP-
+			}
 			if ($theme_options['select_slider'] == "1") {
 				echo fruitful_get_slider_options_flex(); 
 			} else if ($theme_options['select_slider'] == "2") {
